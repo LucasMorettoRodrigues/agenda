@@ -1,0 +1,87 @@
+.calendarContainer {
+  padding: 20px;
+  border-right: 2px solid rgb(231, 231, 231);
+  margin-right: 2px;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 8px;
+  color: #888;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.calendarHeader span {
+  font-size: 50px;
+}
+
+.weekDay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 200;
+  width: 74px;
+  color: #888;
+}
+
+.dayContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+  font-size: 38px;
+  font-weight: 100;
+  color: #555;
+  width: 70px;
+  height: 70px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.dayContainer.today {
+  font-weight: 500;
+}
+
+.dayContainer.inactive {
+  border: 2px solid rgb(243, 243, 243);
+}
+
+.dayContainer.selected {
+  background-color: rgb(54, 206, 54);
+  color: white;
+}
+
+.dayContainer:hover {
+  transform: scale(1.02);
+}
+
+.monthButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 50%;
+}
+
+.monthButton span {
+  font-size: 20px;
+  font-weight: 500;
+  color: #888;
+}
+
+.monthButton:hover {
+  background-color: rgb(231, 231, 231);
+}
