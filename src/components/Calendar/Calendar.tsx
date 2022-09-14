@@ -2,13 +2,14 @@ import { monthNames } from "../../utils/constants";
 import { getAllDaysInMonth, getWeeks } from "../../utils/helpers";
 import styles from "./Calendar.module.css";
 import { AiFillStar } from "react-icons/ai";
+import { Task } from "../../Types/Task";
 
 type Props = {
   date: Date;
   day: Date;
   changeSelectedDate: (control: string) => void;
   selectDay: (date: Date) => void;
-  tasks: any
+  tasks: Task[]
 };
 
 function Calendar({ date, day, changeSelectedDate, selectDay, tasks }: Props) {
@@ -83,7 +84,9 @@ function Calendar({ date, day, changeSelectedDate, selectDay, tasks }: Props) {
                 onClick={() => selectDay(date)}
               >
                 {
-                  tasks.filter((task: any) => task.date.setHours(0, 0, 0, 0) === date.getTime()).length > 0
+                  tasks.filter(task => (
+                    new Date(task.date).setHours(0, 0, 0, 0) === date.getTime()
+                  )).length > 0
                   && <div className={styles.star}><AiFillStar size={16} color="#ffd900" /></div>
                 }
                 {date.getDate()}

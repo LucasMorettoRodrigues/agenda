@@ -4,6 +4,8 @@ import DayInfo from "./components/DayInfo/DayInfo";
 import Header from "./components/Header/Header";
 import Modal from "./components/Modal/Modal";
 import styles from "./App.module.css"
+import { Task } from "./Types/Task";
+import { tasks_data } from "./data/tasks_data";
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -11,23 +13,9 @@ function App() {
   const [selectedDay, setSelectedDay] = useState(
     new Date(new Date().setHours(0, 0, 0, 0))
   );
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      date: new Date(),
-      title: "Task",
-      description: "Description Task",
-    },
-  ]);
-  const [filteredTasks, setFilteredTasks] = useState([
-    {
-      id: 1,
-      date: new Date(),
-      title: "Task",
-      description: "Description Task",
-    },
-  ]);
-  const [selectedTask, setSelectedTask] = useState<any>(null);
+  const [tasks, setTasks] = useState<Task[]>(tasks_data);
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   useEffect(() => {
     setFilteredTasks(
@@ -51,15 +39,15 @@ function App() {
 
   const handleOnHojeClick = () => {
     setSelectedDate(new Date());
-    setSelectedDay(new Date(new Date().setHours(0, 0, 0, 0)));
+    setSelectedDay(new Date());
   };
 
   const handleSelectDay = (day: Date) => {
     setSelectedDay(day);
   };
 
-  const createTask = (task: any) => {
-    setTasks([...tasks, task]);
+  const createTask = (newTask: Task) => {
+    setTasks([...tasks, newTask]);
   };
 
   const handleDeleteTask = (id: string) => {
@@ -71,7 +59,7 @@ function App() {
     setModalIsOpen(true);
   };
 
-  const editTask = (task: any) => {
+  const editTask = (task: Task) => {
     setTasks(tasks.map((item) => (item.id === task.id ? task : item)));
   };
 

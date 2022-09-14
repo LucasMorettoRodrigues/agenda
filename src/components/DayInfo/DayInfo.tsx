@@ -1,13 +1,14 @@
 import { monthNames } from "../../utils/constants";
 import styles from "./DayInfo.module.css";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
+import { Task } from "../../Types/Task";
 
 type Props = {
   day: Date;
   openModal: () => void;
-  tasks: any;
+  tasks: Task[];
   deleteTask: (id: string) => void;
-  editTask: (task: any) => void;
+  editTask: (task: Task) => void;
 };
 
 function DayInfo({ day, openModal, tasks, deleteTask, editTask }: Props) {
@@ -27,7 +28,7 @@ function DayInfo({ day, openModal, tasks, deleteTask, editTask }: Props) {
             <div className={styles.container}>
               <p>
                 <span className={styles.time}>
-                  {task.date.toLocaleTimeString().slice(0, 5)} -{" "}
+                  {task.date.toString().slice(15, 21)} -{" "}
                 </span>
                 <span className={styles.title}>{task.title}</span>
               </p>

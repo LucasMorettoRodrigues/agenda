@@ -1,13 +1,14 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import "./Modal.css";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Task } from "../../Types/Task";
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  onConfirm: any;
+  onConfirm: (task: Task) => void;
   day: Date;
-  task: any;
+  task: Task | null;
 };
 
 let DEFAULT_INPUTS = {
@@ -26,8 +27,14 @@ function Modal({ isOpen, onClose, onConfirm, day, task }: Props) {
 
     if (task) {
       inputs = {
-        hours: { value: task.date.getHours(), isValid: true },
-        minutes: { value: task.date.getMinutes(), isValid: true },
+        hours: {
+          value: task.date.getHours().toString().length === 1 ? `0${task.date.getHours().toString()}` : task.date.getHours().toString(),
+          isValid: true
+        },
+        minutes: {
+          value: task.date.getMinutes().toString().length === 1 ? `0${task.date.getMinutes().toString()}` : task.date.getMinutes().toString(),
+          isValid: true
+        },
         title: { value: task.title, isValid: true },
         description: { value: task.description, isValid: true },
       };
@@ -85,18 +92,11 @@ function Modal({ isOpen, onClose, onConfirm, day, task }: Props) {
       return;
     }
 
-    const newDay = new Date(day);
+    let taskDate = new Date(day);
 
     const newTask = {
-      id: task ? task.id : new Date(),
-      date: new Date(
-        newDay.setHours(
-          parseInt(inputs.hours.value),
-          parseInt(inputs.minutes.value),
-          5,
-          5
-        )
-      ),
+      id: task ? task.id : `${Math.random()}`,
+      date: new Date(taskDate.setHours(parseInt(inputs.hours.value), parseInt(inputs.minutes.value))),
       title: inputs.title.value,
       description: inputs.description.value,
     };
