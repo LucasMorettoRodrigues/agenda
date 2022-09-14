@@ -3,6 +3,7 @@ import Calendar from "./components/Calendar/Calendar";
 import DayInfo from "./components/DayInfo/DayInfo";
 import Header from "./components/Header/Header";
 import Modal from "./components/Modal/Modal";
+import styles from "./App.module.css"
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -41,11 +42,11 @@ function App() {
   const changeSelectedDate = (control: string) => {
     control === "next"
       ? setSelectedDate(
-          new Date(selectedDate.setMonth(selectedDate.getMonth() + 1))
-        )
+        new Date(selectedDate.setMonth(selectedDate.getMonth() + 1))
+      )
       : setSelectedDate(
-          new Date(selectedDate.setMonth(selectedDate.getMonth() - 1))
-        );
+        new Date(selectedDate.setMonth(selectedDate.getMonth() - 1))
+      );
   };
 
   const handleOnHojeClick = () => {
@@ -91,12 +92,13 @@ function App() {
 
       <Header onHojeClick={handleOnHojeClick} />
 
-      <main style={{ display: "flex", minHeight: "89vh" }}>
+      <main className={styles.main}>
         <Calendar
           date={selectedDate}
           day={selectedDay}
           changeSelectedDate={changeSelectedDate}
           selectDay={handleSelectDay}
+          tasks={tasks}
         />
 
         <DayInfo

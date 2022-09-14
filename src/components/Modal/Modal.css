@@ -10,6 +10,7 @@
   visibility: hidden;
   opacity: 0;
   transition: all 0.5s ease-in;
+  z-index: 10;
 }
 
 .modal.visible {
@@ -26,7 +27,7 @@
 
 .window {
   background-color: white;
-  width: 30vw;
+  width: 40vw;
   z-index: 10;
   border-radius: 5px;
   padding: 20px;
@@ -115,4 +116,10 @@
 
 .timeButton:hover {
   background-color: lightgray;
+}
+
+@media screen and (max-width: 768px) {
+  .window {
+    width: 80vw;
+  }
 }

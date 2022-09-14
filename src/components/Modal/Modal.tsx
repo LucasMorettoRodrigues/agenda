@@ -195,6 +195,7 @@ function Modal({ isOpen, onClose, onConfirm, day, task }: Props) {
           placeholder="Adicionar título"
           onChange={handleOnChange}
           value={inputs.title.value}
+          maxLength={35}
         />
         <input
           className="input"

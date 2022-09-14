@@ -1,15 +1,17 @@
 import { monthNames } from "../../utils/constants";
 import { getAllDaysInMonth, getWeeks } from "../../utils/helpers";
 import styles from "./Calendar.module.css";
+import { AiFillStar } from "react-icons/ai";
 
 type Props = {
   date: Date;
   day: Date;
   changeSelectedDate: (control: string) => void;
   selectDay: (date: Date) => void;
+  tasks: any
 };
 
-function Calendar({ date, day, changeSelectedDate, selectDay }: Props) {
+function Calendar({ date, day, changeSelectedDate, selectDay, tasks }: Props) {
   const dates = getAllDaysInMonth(date.getFullYear(), date.getMonth());
 
   const weeks = getWeeks(dates);
@@ -73,14 +75,17 @@ function Calendar({ date, day, changeSelectedDate, selectDay }: Props) {
             )
             .map((date) => (
               <div
-                className={`${styles.dayContainer} ${
-                  date.getTime() === new Date().setHours(0, 0, 0, 0) &&
+                className={`${styles.dayContainer} ${date.getTime() === new Date().setHours(0, 0, 0, 0) &&
                   styles.today
-                } ${date.getTime() === day.getTime() && styles.selected}`}
+                  } ${date.getTime() === day.getTime() && styles.selected}`}
                 key={date.getTime()}
                 id={date.getDate().toString()}
                 onClick={() => selectDay(date)}
               >
+                {
+                  tasks.filter((task: any) => task.date.setHours(0, 0, 0, 0) === date.getTime()).length > 0
+                  && <div className={styles.star}><AiFillStar size={16} color="#ffd900" /></div>
+                }
                 {date.getDate()}
               </div>
             ))}
