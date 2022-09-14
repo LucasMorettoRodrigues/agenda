@@ -39,7 +39,7 @@ function App() {
 
   const handleOnHojeClick = () => {
     setSelectedDate(new Date());
-    setSelectedDay(new Date());
+    setSelectedDay(new Date(new Date().setHours(0, 0, 0, 0)));
   };
 
   const handleSelectDay = (day: Date) => {
